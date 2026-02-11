@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --ink: 15 23 42; /* slate-900 */
+  --muted: 71 85 105; /* slate-600 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--ink));
+  min-height: 100vh;
+
+ body {
+  color: rgb(var(--ink));
+  min-height: 100vh;
+
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(212, 175, 55, 0.22), transparent 60%),
+    radial-gradient(700px 500px at 85% 25%, rgba(16, 185, 129, 0.16), transparent 62%),
+    radial-gradient(900px 700px at 50% 105%, rgba(11, 61, 46, 0.55), transparent 65%),
+    linear-gradient(135deg, #061a14 0%, #0b3d2e 35%, #0f4d3a 60%, #04110d 100%);
+}
+
+
+}
+
+::selection {
+  background: rgba(244, 63, 94, 0.20);
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 20px 60px rgba(2,6,23,.12);
+      .gold-logo {
+    filter: contrast(1.15) saturate(1.15) brightness(1.06);
+  }
+
+  }
+    .gold-frame {
+  @apply relative rounded-[28px] overflow-hidden;
+  padding: 2px;
+  background: linear-gradient(135deg, #fde68a 0%, #d4af37 30%, #fff7cc 55%, #b8871d 80%, #fde68a 100%);
+  box-shadow: 0 30px 90px rgba(0,0,0,.35);
+}
+
+  .gold-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 60%);
+    transform: translateX(-120%);
+    animation: goldShine 4.8s ease-in-out infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes goldShine {
+    0%, 55% { transform: translateX(-120%); }
+    70% { transform: translateX(120%); }
+    100% { transform: translateX(120%); }
+  }
+
+
+  .gold-frame::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.45), transparent 45%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,.18), transparent 55%);
+    transform: rotate(12deg);
+    pointer-events: none;
+  }
+
+  .gold-inner {
+  @apply rounded-[26px] overflow-hidden border border-white/10;
+  background:
+    radial-gradient(900px 220px at 15% 20%, rgba(212,175,55,.16), transparent 60%),
+    radial-gradient(520px 220px at 85% 40%, rgba(16,185,129,.18), transparent 60%),
+    linear-gradient(135deg, #061a14 0%, #0b3d2e 40%, #0f4d3a 75%, #04110d 100%);
+}
+
+ .title-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(90deg, #fde68a 0%, #d4af37 35%, #f5e7a1 55%, #b8871d 75%, #fde68a 100%);
+}
+
+
+  .section {
+    @apply scroll-mt-24;
+  }
+
+
+/* Scrollbar */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.5);
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.22);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.35);
+}
+}
