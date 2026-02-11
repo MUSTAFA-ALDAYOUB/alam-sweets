@@ -79,7 +79,7 @@ export default function ProductsPage() {
 
           <div className="mt-6 flex flex-wrap gap-2 relative">
             {categories.map((c) => (
-              <Chip key={c.id} active={cat === c.id} onClick={() => setCategory(c.id)}>
+              <Chip key={c.id} active={cat === c.id} onClick={() => setCategory(c.id as CategoryId)}>
                 {c.title}
               </Chip>
             ))}
