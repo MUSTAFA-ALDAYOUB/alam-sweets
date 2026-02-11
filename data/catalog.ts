@@ -1,5 +1,6 @@
 // أقسام الموقع
-export const categories = [
+
+export const categories: { id: CategoryId; title: string; description: string }[] = [
   {
     id: "arabic",
     title: "الحلويات العربية",
@@ -21,6 +22,7 @@ export const categories = [
     description: "حلويات صغيرة أنيقة",
   },
 ];
+
 
 // أنواع البيانات
 export type CategoryId = "arabic" | "gateau" | "pastries" | "petitfour";
@@ -98,10 +100,11 @@ export const products: Product[] = [
     available: true,
   },
   {
-    id: "basli-walnut",
-    name: "بصلة بجوز",
-    category: "arabic",
-    description: "حلوى محشوة بالجوز الطبيعي",
+  id: "basli-walnut",
+  name: "بصلة بجوز",
+  category: "arabic",
+  description: "حلوى محشوة بالجوز الطبيعي",
+  available: true,
+},
 
-  },
 ];
