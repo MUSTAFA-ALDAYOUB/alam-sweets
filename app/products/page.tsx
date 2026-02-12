@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search, MessageCircle, Filter } from "lucide-react";
 
@@ -14,7 +13,8 @@ function categoryTitle(id: CategoryId) {
   return categories.find((c) => c.id === id)?.title ?? "قسم";
 }
 
-export default function ProductsPage() {
+// ✅ كل ما يستخدم useSearchParams لازم يكون داخل مكوّن يُلف بـ Suspense
+function ProductsClient() {
   const [q, setQ] = useState("");
 
   const router = useRouter();
@@ -56,10 +56,14 @@ export default function ProductsPage() {
                 <Filter className="h-4 w-4" />
                 الكاتالوج
               </div>
+
               <h1 className="mt-3 text-2xl md:text-4xl font-black">
                 <span className="title-gradient">الأصناف والأسعار</span>
               </h1>
-              <p className="mt-2 text-slate-600">اختر القسم، وابحث بالاسم. الطلب يتم عبر واتساب.</p>
+
+              <p className="mt-2 text-slate-600">
+                اختر القسم، وابحث بالاسم. الطلب يتم عبر واتساب.
+              </p>
             </div>
 
             <div className="w-full md:w-[380px]">
@@ -73,13 +77,27 @@ export default function ProductsPage() {
                 />
               </div>
 
-              
+              <div className="mt-3">
+                <Button
+                  variant="whatsapp"
+                  className="w-full"
+                  onClick={() => window.open(waLink(quickHelloMessage()), "_blank")}
+                  title="اطلب الآن عبر واتساب"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  اطلب عبر واتساب
+                </Button>
+              </div>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2 relative">
             {categories.map((c) => (
-              <Chip key={c.id} active={cat === c.id} onClick={() => setCategory(c.id as CategoryId)}>
+              <Chip
+                key={c.id}
+                active={cat === c.id}
+                onClick={() => setCategory(c.id as CategoryId)}
+              >
                 {c.title}
               </Chip>
             ))}
@@ -107,14 +125,19 @@ export default function ProductsPage() {
               <div key={p.id} className="glass rounded-2xl p-4">
                 <div className="flex gap-3">
                   <div className="relative h-20 w-20 rounded-2xl overflow-hidden border border-white/40 bg-white/60">
-                    <Image src={p.image || "/placeholder.svg"} alt={p.name} fill className="object-cover" />
+                    <Image
+                      src={p.image || "/placeholder.svg"}
+                      alt={p.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   <div className="flex-1">
                     <div className="font-extrabold">{p.name}</div>
 
                     <div className="mt-1 text-sm font-extrabold text-slate-900">
-                      {typeof p.price === "number" ? `${p.price}$` : "السعر عند الطلب"}
+                      {typeof p.price === "number" ? `${p.price} ر.س` : "السعر عند الطلب"}
                     </div>
 
                     <div className="text-sm text-slate-600 mt-2">{p.description}</div>
@@ -128,18 +151,24 @@ export default function ProductsPage() {
             ))}
           </div>
         )}
-
-        <div className="mt-8 glass rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div>
-            <div className="font-extrabold">جاهز للطلب؟</div>
-            <div className="text-sm text-slate-600">اكتب لنا الأصناف المطلوبة وسنرد عليك سريعًا.</div>
-          </div>
-          <Button variant="whatsapp" onClick={() => window.open(waLink(quickHelloMessage()), "_blank")}>
-            <MessageCircle className="h-5 w-5" />
-            اطلب عبر واتساب
-          </Button>
-        </div>
       </section>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-6xl mx-auto px-4 py-10">
+          <div className="glass rounded-3xl p-8 text-center">
+            <div className="font-extrabold">جاري التحميل…</div>
+            <div className="text-sm text-slate-600 mt-2">يرجى الانتظار</div>
+          </div>
+        </div>
+      }
+    >
+      <ProductsClient />
+    </Suspense>
   );
 }
