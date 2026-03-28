@@ -8,20 +8,20 @@ type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "text-white bg-gradient-to-r from-rose-500 via-fuchsia-500 to-amber-400 hover:brightness-110 shadow-[0_12px_40px_rgba(244,63,94,0.25)]",
+    "text-white bg-gradient-to-r from-[#1a2f23] to-[#2c4a38] hover:from-[#2c4a38] hover:to-[#3e664d] shadow-[0_8px_30px_rgba(26,47,35,0.3)] border border-[#d4af37]/40",
   secondary:
-    "text-slate-900 bg-white/70 hover:bg-white/90 border border-white/40 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,.18),_0_20px_60px_rgba(2,6,23,.12)]",
+    "text-[#1a2f23] bg-white/80 hover:bg-white border border-[#d4af37]/40 backdrop-blur-xl shadow-[0_8px_30px_rgba(212,175,55,0.15)]",
   outline:
-    "text-slate-900 bg-transparent border border-slate-200/70 hover:bg-white/60 backdrop-blur-xl",
-  ghost: "text-slate-700 hover:text-slate-900 hover:bg-white/60",
+    "text-[#1a2f23] bg-transparent border-2 border-[#1a2f23]/20 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#1a2f23]/5 backdrop-blur-xl",
+  ghost: "text-slate-600 hover:text-[#d4af37] hover:bg-[#1a2f23]/5",
   whatsapp:
-    "text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:brightness-110 shadow-[0_12px_40px_rgba(16,185,129,0.25)]",
+    "text-white bg-[#128C7E] hover:bg-[#075E54] shadow-[0_8px_30px_rgba(18,140,126,0.3)]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm",
-  md: "h-11 px-4 text-sm",
-  lg: "h-12 px-5 text-base",
+  sm: "h-9 px-4 text-xs",
+  md: "h-11 px-6 text-sm",
+  lg: "h-14 px-8 text-base font-bold tracking-wide",
 };
 
 export const Button = React.forwardRef<
@@ -32,7 +32,7 @@ export const Button = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition focus:outline-none focus:ring-2 focus:ring-rose-400/60 disabled:opacity-50 disabled:pointer-events-none",
+        "inline-flex items-center justify-center gap-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/60 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none",
         variantClasses[variant],
         sizeClasses[size],
         className
@@ -50,7 +50,7 @@ export const IconButton = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 border border-white/40 backdrop-blur-xl text-slate-700 hover:text-slate-900 hover:bg-white/90 transition shadow-[0_0_0_1px_rgba(255,255,255,.18),_0_20px_60px_rgba(2,6,23,.12)] focus:outline-none focus:ring-2 focus:ring-rose-400/60",
+        "inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/80 border border-[#d4af37]/30 backdrop-blur-xl text-[#1a2f23] hover:text-[#d4af37] hover:bg-white hover:shadow-[0_8px_30px_rgba(212,175,55,0.2)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d4af37]/60",
         className
       )}
       {...props}
@@ -64,7 +64,7 @@ export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttribute
       <input
         ref={ref}
         className={cn(
-          "h-11 w-full rounded-xl bg-white/70 border border-white/40 backdrop-blur-xl px-4 text-slate-900 placeholder:text-slate-400 shadow-[0_0_0_1px_rgba(255,255,255,.18),_0_20px_60px_rgba(2,6,23,.12)] outline-none focus:ring-2 focus:ring-rose-400/60",
+          "h-12 w-full rounded-2xl bg-white/60 border border-[#1a2f23]/10 backdrop-blur-md px-4 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 hover:border-[#d4af37]/50 shadow-sm transition-all outline-none",
           className
         )}
         {...props}
@@ -81,7 +81,7 @@ export const Textarea = React.forwardRef<
     <textarea
       ref={ref}
       className={cn(
-        "min-h-[90px] w-full rounded-xl bg-white/70 border border-white/40 backdrop-blur-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 shadow-[0_0_0_1px_rgba(255,255,255,.18),_0_20px_60px_rgba(2,6,23,.12)] outline-none focus:ring-2 focus:ring-rose-400/60",
+        "min-h-[120px] w-full rounded-2xl bg-white/60 border border-[#1a2f23]/10 backdrop-blur-md px-4 py-4 text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 hover:border-[#d4af37]/50 shadow-sm transition-all outline-none",
         className
       )}
       {...props}
@@ -98,10 +98,10 @@ export function Chip({
   return (
     <button
       className={cn(
-        "h-9 px-3 rounded-full border text-sm font-semibold transition backdrop-blur-xl",
+        "h-10 px-5 rounded-full border text-sm font-medium transition-all duration-300 backdrop-blur-xl",
         active
-          ? "bg-slate-900 text-white border-slate-900 shadow-[0_10px_30px_rgba(15,23,42,0.25)]"
-          : "bg-white/60 text-slate-700 border-white/40 hover:bg-white/85",
+          ? "bg-[#1a2f23] text-white border-[#1a2f23] shadow-[0_8px_20px_rgba(26,47,35,0.25)]"
+          : "bg-white/80 text-[#1a2f23] border-[#1a2f23]/10 hover:border-[#d4af37]/50 hover:text-[#d4af37] hover:bg-white",
         className
       )}
       {...props}
