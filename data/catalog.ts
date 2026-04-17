@@ -21,11 +21,7 @@ export const categories: { id: CategoryId; title: string; description: string }[
     title: "الجاتو",
     description: "كيك وجاتو للمناسبات الخاصة",
   },
-  {
-    id: "petitfour",
-    title: "البيتيفور",
-    description: "حلويات صغيرة أنيقة",
-  },
+
   {
     id: "kunafa",
     title: "الكنافة",
@@ -40,7 +36,7 @@ export const categories: { id: CategoryId; title: string; description: string }[
 
 
 // أنواع البيانات
-export type CategoryId = "arabic" | "harissa" | "pastries" | "gateau" | "petitfour" | "kunafa" | "shuaibiyat";
+export type CategoryId = "arabic" | "harissa" | "pastries" | "gateau" | "kunafa" | "shuaibiyat";
 
 export type Product = {
   id: string;
@@ -81,7 +77,7 @@ export const products: Product[] = [
   { id: "harissa-plain", name: "هريسة عادية", category: "harissa", description: "هريسة سادة تقليدية", image: "/products/harissa-plain.jpeg", available: true },
 
   // --- قسم المعجنات ---
-  { id: "kaak-water-cheese", name: "كعك ماء (كعك مياه جبنة)", category: "pastries", description: "كعك مالح بالجبنة", image: "/products/kaak-water-cheese.jpeg", available: true },
+  { id: "kaak-water-cheese", name: "كعك مياه جبنة", category: "pastries", description: "كعك مالح بالجبنة", image: "/products/kaak-water-cheese.jpeg", available: true },
   { id: "kaak-salty", name: "كعك تبلي مالح", category: "pastries", description: "كعك تبلي مقرمش مالح", image: "/products/kaak-salty.jpeg", available: true },
   { id: "ajwa-shami", name: "عجوة شامي", category: "pastries", description: "معروف بالعجوة على الطريقة الشامية", image: "/products/ajwa-shami.jpeg", available: true },
   { id: "ajwa-halabi", name: "عجوة حلبي", category: "pastries", description: "معروف بالعجوة على الطريقة الحلبية", image: "/products/ajwa-halabi.jpeg", available: true },
@@ -95,6 +91,7 @@ export const products: Product[] = [
   { id: "maamoul-shami-walnut", name: "معمول شامي جوز", category: "pastries", description: "معمول شامي كلاسيكي بالجوز", image: "/products/maamoul-shami-walnut.jpeg", available: true },
   { id: "petitfour-turkish-sweet", name: "بيتيفور تركي حلو", category: "pastries", description: "بيتيفور على الطريقة التركية (حلو)", image: "/products/petitfour-turkish-sweet.jpeg", available: true },
   { id: "petitfour-turkish-salty", name: "بيتيفور تركي مالح", category: "pastries", description: "بيتيفور هش على الطريقة التركية (مالح)", image: "/products/petitfour-turkish-salty.jpeg", available: true },
+
 
   // --- قسم الكنافة ---
   { id: "kunafa-regular", name: "كنافة عادية", category: "kunafa", description: "كنافة شهية معدة على الأصول", image: "/products/kunafa-regular.jpeg", available: true },
